@@ -1,0 +1,23 @@
+# Name of the organization that publishes the data source
+source_organization: # TODO
+# Web address of the data source
+source_url: # TODO
+# Web address pointing to any indication of a terms of use for the data
+terms_of_use: # TODO
+
+# List of all output files
+# Note that source_organization, source_url, and terms_of_use can be overridden
+#   for each output by providing those fields in the output entries.
+outputs:
+  -
+    description: # TODO
+    type: # TODO: currently there are only schemas for type: casecounts
+    file: # TODO: provide local path to output csv file: output/[file].csv
+    admin_level: # TODO: one of 0, 1, 2, global, continents, who_regions
+    schema: #TODO: local path or URL pointing to schema (see https://github.com/covid-open-data/data-registry)
+  -
+    description: # TODO
+    type: # TODO: currently there are only schemas for type: casecounts
+    file: # TODO: provide local path to output csv file: output/[file].csv
+    admin_level: # TODO: one of 0, 1, 2, global, continents, who_regions
+    schema: #TODO: local path or URL pointing to schema (see https://github.com/covid-open-data/data-registry)
