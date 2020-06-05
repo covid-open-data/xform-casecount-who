@@ -37,10 +37,12 @@ The main [Makefile](Makefile) has commands for executing each action.
 
 Primary Commands:
 - `make run-workflow`
-  - Runs the xform and git-push. 
+  - Runs the xform, CSV validation, and git-push.
   - Running locally via docker-compose does not commit and push. Edit [.github/actions/git-push/docker-compose.yml](.github/actions/git-push/docker-compose.yml) to modify this behaviour if needed.
 - `make run-xform`
   - Run the xform.
+- `make run-validate-csv`
+  - The the CSV validation.
 - `make run-git-push`
   - Run git push.
 
