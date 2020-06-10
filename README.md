@@ -7,7 +7,7 @@ The workflow for transformation is managed via [GitHub Actions](https://github.c
 
 ## Usage
 
-1. Copy or fork this repo.
+1. From the repo GitHub page click the "Use this template" button to create a new repo for your transformer.
 2. Search the repo for `TODO` and make the appropriate changes for your transformer.
 3. Update xform.yml to provide metadata for the data source and outputs.
 4. Update this README file with relevant information about the data source.
