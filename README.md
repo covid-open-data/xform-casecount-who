@@ -7,7 +7,7 @@ The workflow for transformation is managed via [GitHub Actions](https://github.c
 
 ## Usage
 
-1. Copy or fork this repo.
+1. From the repo GitHub page click the "Use this template" button to create a new repo for your transformer.
 2. Search the repo for `TODO` and make the appropriate changes for your transformer.
 3. Update xform.yml to provide metadata for the data source and outputs.
 4. Update this README file with relevant information about the data source.
@@ -37,10 +37,12 @@ The main [Makefile](Makefile) has commands for executing each action.
 
 Primary Commands:
 - `make run-workflow`
-  - Runs the xform and git-push. 
+  - Runs the xform, CSV validation, and git-push.
   - Running locally via docker-compose does not commit and push. Edit [.github/actions/git-push/docker-compose.yml](.github/actions/git-push/docker-compose.yml) to modify this behaviour if needed.
 - `make run-xform`
   - Run the xform.
+- `make run-validate-csv`
+  - The the CSV validation.
 - `make run-git-push`
   - Run git push.
 
