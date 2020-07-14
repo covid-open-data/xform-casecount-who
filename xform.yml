@@ -1,23 +1,35 @@
 # Name of the organization that publishes the data source
-source_organization: # TODO
+source_organization: World Health Organization (WHO)
 # Web address of the data source
-source_url: # TODO
+source_url: https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports
 # Web address pointing to any indication of a terms of use for the data
-terms_of_use: # TODO
+terms_of_use: 
 
 # List of all output files
 # Note that source_organization, source_url, and terms_of_use can be overridden
 #   for each output by providing those fields in the output entries.
 outputs:
   -
-    description: # TODO
-    type: # TODO: currently there are only schemas for type: casecounts
-    file: # TODO: provide local path to output csv file: output/[file].csv
-    admin_level: # TODO: one of 0, 1, 2, global, continents, who_regions
-    schema: #TODO: local path or URL pointing to schema (see https://github.com/covid-open-data/data-registry)
+    description: Daily cumulative case and death counts for all affected countries and territories.
+    type: casecounts
+    file: output/admin0/all.csv
+    admin_level: 0
+    schema: https://raw.githubusercontent.com/covid-open-data/data-registry/case-counts-schemas/schemas/case-counts/admin0/v1/admin0.json
   -
-    description: # TODO
-    type: # TODO: currently there are only schemas for type: casecounts
-    file: # TODO: provide local path to output csv file: output/[file].csv
-    admin_level: # TODO: one of 0, 1, 2, global, continents, who_regions
-    schema: #TODO: local path or URL pointing to schema (see https://github.com/covid-open-data/data-registry)
+    description: Daily cumulative case and death counts for each WHO Region.
+    type: casecounts
+    file: output/who_regions.csv
+    admin_level: who_regions
+    schema: https://raw.githubusercontent.com/covid-open-data/data-registry/case-counts-schemas/schemas/case-counts/who_regions/v1/who_regions.json
+  -
+    description: Daily cumulative case and death counts for each continent.
+    type: casecounts
+    file: output/continents.csv
+    admin_level: continents
+    schema: https://github.com/covid-open-data/data-registry/blob/case-counts-schemas/schemas/case-counts/continents/v1/continents.json
+  -
+    description: Daily cumulative case and death counts globally.
+    type: casecounts
+    file: output/global.csv
+    admin_level: global
+    schema: https://raw.githubusercontent.com/covid-open-data/data-registry/case-counts-schemas/schemas/case-counts/global/v1/global.json
