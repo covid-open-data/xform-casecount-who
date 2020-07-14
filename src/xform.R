@@ -1,6 +1,6 @@
 # https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json
 # https://covid19.who.int
-suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(geoutils))
 
 dir.create("output", showWarning = FALSE)
@@ -12,19 +12,19 @@ a <- jsonlite::fromJSON("https://dashboards-dev.sprinklr.com/data/9043/global-co
 a$dimensions$name
 a$metrics$name
 
+colnames(a$rows) <- c("date", "admin0_code", "who_region_code",
+  "deaths1", "deaths", "cases1", "cases")
+
 d <- as_tibble(a$rows)
 
 if (ncol(d) != 7)
   stop("Data format has changed...")
 
-names(d) <- c("date", "admin0_code", "who_region_code",
-  "deaths1", "deaths", "cases1", "cases")
-
 d <- d %>%
   select(!contains("1")) %>%
   filter(admin0_code != "Other*") %>%
+  mutate_at(vars(matches("death|case")), as.integer) %>%
   mutate(
-    across(matches("death|case"), as.integer),
     date = as.Date(as.POSIXct(as.numeric(date) / 1000, origin = "1970-01-01")))
 
 d <- d %>%
