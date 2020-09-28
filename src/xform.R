@@ -1,4 +1,3 @@
-# https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json
 # https://covid19.who.int
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(geoutils))
@@ -6,26 +5,19 @@ suppressPackageStartupMessages(library(geoutils))
 dir.create("output", showWarning = FALSE)
 dir.create("output/admin0", showWarning = FALSE)
 
-# a <- jsonlite::fromJSON("https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json", simplifyDataFrame = FALSE, simplifyVector = FALSE)
-a <- jsonlite::fromJSON("https://dashboards-dev.sprinklr.com/data/9043/global-covid19-who-gis.json")
+d <- readr::read_csv("https://covid19.who.int/WHO-COVID-19-global-data.csv",
+  na = c("", " "))
 
-a$dimensions$name
-a$metrics$name
+names(d) <- c("date", "admin0_code", "admin0_name", "who_region_code",
+  "cases1", "cases", "deaths1", "deaths")
 
-colnames(a$rows) <- c("date", "admin0_code", "who_region_code",
-  "deaths1", "deaths", "cases1", "cases")
-
-d <- as_tibble(a$rows)
-
-if (ncol(d) != 7)
+if (ncol(d) != 8)
   stop("Data format has changed...")
 
 d <- d %>%
   select(!contains("1")) %>%
-  filter(admin0_code != "Other*") %>%
-  mutate_at(vars(matches("death|case")), as.integer) %>%
-  mutate(
-    date = as.Date(as.POSIXct(as.numeric(date) / 1000, origin = "1970-01-01")))
+  filter(admin0_name != "Other") %>%
+  select(-admin0_name)
 
 d <- d %>%
   select(-who_region_code) %>%
